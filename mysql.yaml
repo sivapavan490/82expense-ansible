@@ -6,3 +6,20 @@
     ansible.builtin.pasckage:
       name: mysql-server
       state: installed
+  - name: start and enable mysql server
+    ansible.builtin.service:
+      name: mysql
+      state: started
+      enabled: yes
+  # to connect database is connected or not
+  - name: connect to mysql server
+    commmunity.mysql.mysql_info:
+      login_user: root
+      login_password: ExpenseApp@1
+      login_host: mysql.daws82s.online #ip addres or route53record name
+      # to take the output we will use register variable in ansible to store the output
+      register: mysql_info
+
+  - name: print the output
+    ansible.builtin.debug:
+      msg: "mysql info: {{ mysql_info }}"
