@@ -1,4 +1,7 @@
-
+- name: configure backend servers
+  hosts: mysql
+  become: yes
+  tasks:
 # To connect mysqlserver we need some libraires in python
   - name: Install mysql libraries
     ansible.builtin.pip:
